@@ -15,7 +15,7 @@ public class BigStringSort {
     }
 
     private int[] solve(String[] arr){
-        StringWrapper[] result = new StringWrapper[][arr.length];
+        StringWrapper[] result = new StringWrapper[arr.length];
 
         for(int i = 0; i < arr.length; i++) {
             result[i] = this.new StringWrapper(arr[i]);
