@@ -1,7 +1,5 @@
 package search;
 
-import scala.Array;
-
 import java.util.Scanner;
 
 /**

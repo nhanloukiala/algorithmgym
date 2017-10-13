@@ -13,8 +13,6 @@ public class GridlandMetro {
         // Maintain a dictionary with (row, min, max)
         int[][] dict = new int[arr.length][];
 
-        for(int i = 0;)
-
         return result;
     }
 
