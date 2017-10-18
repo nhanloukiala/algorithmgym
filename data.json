@@ -1,0 +1,46 @@
+[
+  {
+    "meta" : {
+      "entity_id" : "/collections/collection_of_collection_yoga_accessories_women",
+      "trackingId" : "6b5700cb-50e6-4b62-a272-9fb98e1e1dd6"
+    },
+    "entities" : [
+      {
+        "meta" : {
+          "entity_id" : "/collections/collection_of_collection_yoga_accessories_women",
+          "trackingId" : "6b5700cb-50e6-4b62-a272-9fb98e1e1dd6"
+        },
+        "entities" : [
+          {
+            "meta" : {
+              "entity_id" : "/collections/ng-public-gencol#yoga-pilates#favourite-brands#-women",
+              "trackingId" : "6264E093-2FDF-48E5-BB59-9B0F884FE281"
+            },
+            "entities" : []
+          },
+          {
+            "meta" : {
+              "entity_id" : "/collections/ng-public-curcol#yoga#tights#editor-pick#-women",
+              "trackingId" : "2BF8BF35-DD57-45EC-8823-8455A9D37F32"
+            },
+            "entities" : []
+          },
+          {
+            "meta" : {
+              "entity_id" : "/collections/ng-public-curcol#sport#tropical-prints#-women",
+              "trackingId" : "2BF8BF35-DD57-45EC-8823-8455A9D37F32"
+            },
+            "entities" : []
+          }
+        ]
+      },
+      {
+        "meta" : {
+          "entity_id" : "personalized-articles",
+          "trackingId" : "2BF8BF35-DD57-45EC-8823-8455A9D37F32"
+        },
+        "entities" : []
+      }
+    ]
+  }
+]
