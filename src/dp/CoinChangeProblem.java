@@ -6,51 +6,21 @@ import java.util.*;
  * Created by ntrinh on 15/10/17.
  */
 public class CoinChangeProblem {
-    private static class Pair {
-        public List<Integer> set;
-        public long value;
-        public boolean unique;
-
-        public Pair(long value, List<Integer> set) {
-            this.value = value;
-            this.set = set;
-            this.unique = false;
-        }
-
-        public void update(long value) {
-            this.value += value;
-        }
-
-        public void update(long value, int index) {
-            this.value += value;
-            set.add(index);
-        }
-    }
-
     private static long solve(int[] arr, int n) {
-        Pair[] cache = new Pair[n + 1];
-        cache[0] = new Pair(0, new ArrayList<>());
-        Set<Integer> visited = new HashSet<>();
-        for (int i = 1; i < cache.length; i++) {
+        Arrays.sort(arr);
+        long[][] cache = new long[arr.length + 1][n + 1];
 
-            cache[i] = new Pair(0, new ArrayList<>());
-            for (int j = 0; j < arr.length; j++) {
-                if (i - arr[j] == 0) {
-                    cache[i].update(1);
-                    cache[i].unique = true;
-                }
-                if ((i - arr[j]) > 0) {
-                    if (!visited.contains(i - arr[j])) {
-                        cache[i].update(cache[i - arr[j]].value);
-                        visited.add(i - arr[j]);
-                    }
+        for(int i = 0; i < cache.length; i++) cache[i][0] = 1;
+        for(int i = 0; i < cache[0].length; i++) cache[0][i] = 0;
 
-                    if (cache[i - arr[j]].unique) cache[i].value++;
-                }
+        for(int i = 1; i < cache[0].length; i++) {
+            for(int j = 1; j < cache.length; j++) {
+                long prev = ((i - arr[j - 1] >= 0) ? cache[j][i - arr[j - 1]] : 0);
+                cache[j][i] = cache[j-1][i] + prev;
             }
         }
 
-        return cache[n].value;
+        return cache[arr.length][n];
     }
 
     public static void main(String[] args) {
