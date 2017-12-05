@@ -1,0 +1,9 @@
+@startuml
+CFA -> ContentBroker: ConfigurationRequest
+ContentBroker --> CFA: ConfigurationResponse
+
+CFA -> SSP: ContentRequest (slot_id, format, context, client_id, ..)
+SSP -> DSP: BidRequest (cfa_id, reserve_price, context, format, client_id, ..)
+DSP --> SSP: BidResponse (content, winner_price, ..)
+SSP --> CFA: Content Response (content, meta_data)
+@enduml
