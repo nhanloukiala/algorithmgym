@@ -20,11 +20,7 @@ public class GridlandMetro {
             TrainTrack.this.ecol = ecol;
         }
 
-//        public boolean equals(TrainTrack other){
-//            if(other.row != TrainTrack.this.row) return false;
-//            if((other.scol <= TrainTrack.this.scol && other.ecol >= TrainTrack.this.scol) || (TrainTrack.this.scol <= other.scol && TrainTrack.this.ecol >= other.scol)) return true;
-//            return false; //never happens
-//        }
+
 
         @Override
         public boolean equals(Object obj) {
