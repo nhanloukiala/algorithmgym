@@ -47,7 +47,7 @@ public class CrosswordPuzzle {
         // Scan horizontally
         if (hor) {
             for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length - word.size(); j++) {
+                for (int j = 0; j <= matrix[0].length - word.size(); j++) {
                     if (matrix[i][j] == '-' || word.getFirst() == (matrix[i][j])) {
                         char[][] cloneMat = new char[10][10];
                         dim2Copy(matrix, cloneMat);
@@ -60,7 +60,7 @@ public class CrosswordPuzzle {
         } else {
             // Scan vertically
             for (int j = 0; j < matrix[0].length; j++) {
-                for (int i = 0; i < matrix.length - word.size(); i++) {
+                for (int i = 0; i <= matrix.length - word.size(); i++) {
                     if (matrix[i][j] == '-' || matrix[i][j] == word.getFirst()) {
                         char[][] cloneMat = new char[10][10];
                         dim2Copy(matrix, cloneMat);
@@ -112,15 +112,12 @@ public class CrosswordPuzzle {
     }
 
     private static void solve(char[][] matrix, ArrayList<String> candidates) {
+        if (candidates.isEmpty()) {
+            print(matrix);
+            return;
+        }
+
         for (String word : candidates) {
-            if (candidates.size() == 1)
-                print(matrix);
-
-            if (candidates.isEmpty()) {
-                print(matrix);
-                return;
-            }
-
             LinkedList<Character> lword = new LinkedList<>();
             char[] arr = word.toCharArray();
             for (int i = 0; i < arr.length; i++) {
