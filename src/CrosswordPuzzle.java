@@ -7,38 +7,13 @@ import java.util.*;
  */
 
 public class CrosswordPuzzle {
+    private static boolean flag = false;
     private static void dim2Copy(char[][] matrix, char[][] dest) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 dest[i][j] = matrix[i][j];
             }
         }
-    }
-
-    private static boolean scan(char matrix[][], LinkedList<Character> word, boolean hor) {
-        // Scan horizontally
-        if (hor) {
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length - word.size(); j++) {
-                    if (matrix[i][j] == '-' || matrix[i][j] == word.getFirst()) {
-                        if (tryPut(matrix, word, i, j, hor))
-                            return true;
-                    }
-                }
-            }
-        } else {
-            // Scan vertically
-            for (int j = 0; j < matrix[0].length; j++) {
-                for (int i = 0; i < matrix.length - word.size(); i++) {
-                    if (matrix[i][j] == '-' || matrix[i][j] == word.getFirst()) {
-                        if (tryPut(matrix, word, i, j, hor))
-                            return true;
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 
     private static List<char[][]> scanMod(char matrix[][], LinkedList<Character> word, boolean hor) {
@@ -61,10 +36,11 @@ public class CrosswordPuzzle {
             // Scan vertically
             for (int j = 0; j < matrix[0].length; j++) {
                 for (int i = 0; i <= matrix.length - word.size(); i++) {
+
                     if (matrix[i][j] == '-' || matrix[i][j] == word.getFirst()) {
                         char[][] cloneMat = new char[10][10];
                         dim2Copy(matrix, cloneMat);
-                        if (tryPut(matrix, word, i, j, hor))
+                        if (tryPut(cloneMat, word, i, j, hor))
                             result.add(cloneMat);
                     }
                 }
@@ -111,9 +87,24 @@ public class CrosswordPuzzle {
         }
     }
 
+    private static boolean check(char[][] mat) {
+        for(int i = 0 ; i < mat.length; i++) {
+            for(int j = 0; j < mat[0].length; j++) {
+                if(mat[i][j] == '-')
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
     private static void solve(char[][] matrix, ArrayList<String> candidates) {
-        if (candidates.isEmpty()) {
-            print(matrix);
+        if (check(matrix)) {
+            if(!flag) {
+                flag = true;
+                print(matrix);
+            }
+
             return;
         }
 
