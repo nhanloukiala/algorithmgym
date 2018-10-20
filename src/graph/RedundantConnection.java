@@ -35,11 +35,46 @@ class RedundantConnection {
     else
       return new HashSet<>();
   }
+    
+  boolean noCycle(int node, int from, int to, Hashtable<Integer, List<Integer>> graph, Set<Integer> vertexes) {
+      graph.get(from).remove((Integer)to);
+      System.out.println(graph);
+      Set<Integer> visited = new HashSet<Integer>();
+      Stack<Integer> stack = new Stack<Integer>();
+      Stack<Integer> parents = new Stack<Integer>();
+      stack.add(node);
+      parents.add(node);
+      
+      while(!stack.isEmpty()) {
+          int current = stack.pop();
+          int parent = parents.pop();
+          System.out.println(stack);
+          
+          if(visited.contains(current)) {
+              graph.get(from).add(to);
+              return false;
+          } else {
+              visited.add(current);
+              if(graph.get(current) != null) {
+              for(Integer i : graph.get(current)) {
+                  parents.add(current);
+                  stack.push(i);
+              }
+            }
+          }
+      }
+      
+      graph.get(from).add(to);
+      System.out.println(visited);
+      
+      if(vertexes.size() == visited.size())
+        return true;
+      else 
+          return false;
+  }
 
   public int[] findRedundantDirectedConnection(int[][] arr) {
-    // iterate through edges, pick the start vertex and do a dfs, if you encounter circle, remove the edge for the first time, if the dfs finishes, it's an edge which can be removed.
-
-    Map<Integer, List<Integer>> graph = new Hashtable<Integer, List<Integer>>();
+    Hashtable<Integer, List<Integer>> graph = new Hashtable<Integer, List<Integer>>();
     HashSet<Integer> vertex = new HashSet<Integer>();
 
     // populate
@@ -65,7 +100,9 @@ class RedundantConnection {
     }
 
     for(int i = arr.length - 1; i >= 0; i--) {
-      if(set.contains(arr[i][1])) return new int[] {arr[i][0], arr[i][1] };
+      if(set.contains(arr[i][1]) && noCycle(arr[node][0], arr[i][0], arr[i][1], graph, vertex)) {
+          return new int[]{ arr[i][0], arr[i][1]}; 
+      }
     }
 
     return null;
