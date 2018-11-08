@@ -1,7 +1,10 @@
 package search;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -57,7 +60,40 @@ public class LongestSubStringPalindrome {
     return max;
   }
 
+  static ArrayList<int[]> extensions(String s) {
+    char[] arr = s.toCharArray();
+    Set<String> resultStr = new HashSet<>();
+    ArrayList<int[]> result = new ArrayList();
+
+    if(s.length() < 4) return result;
+
+    int start = 0;
+
+    for(int i = 0; i < arr.length; i++) {
+        if(arr[i] != arr[start])
+          start = i;
+
+        if(i - start >= 3 &&
+            !resultStr.contains(s.substring(start, i))) {
+          resultStr.add(s.substring(start, i));
+          result.add(new int[]{start, i});
+        }
+    }
+
+    return result;
+  }
+
+  static void printResult(List<int[]> result) {
+    for(int[] r: result) {
+      System.out.println(Arrays.toString(r));
+    }
+  }
+
   public static void main(String[] args) {
-    System.out.println(longestPalindrome("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"));
+//    printResult(extensions("aaaaal"));
+//    printResult(extensions("haaaaal"));
+//    printResult(extensions("haaaaallllllll"));
+//    printResult(extensions("haaaaalllllllloooo"));
+    printResult(extensions("abababa"));
   }
 }
